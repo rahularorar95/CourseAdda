@@ -1,33 +1,58 @@
-.App {
-  text-align: center;
+.button-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    margin-top: .5rem;
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.card {
+    margin-bottom: 20px !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.course-length {
+    position: absolute;
+    bottom: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.total-courses-text {
+    margin-left: 8rem;
+    padding: .5rem 2rem 2rem 2rem ;
+}
+.custom-dropdown {
+    transform: translate3d(0px, 38px, 0px) !important;
+}
+.text-muted {
+    color: #00953A !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.list-unstyled {
+    max-height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.course-card{
+    width: 15rem;
+    flex: inherit !important;
+    height: 18rem;
+    border: 0;
+    box-shadow: 2px 3px 10px 1px #eee;
+    cursor: pointer;
+}
+
+.course-card:hover {
+    box-shadow: 2px 3px 10px 1px #aaa;
+}
+.jumbotron {
+    box-shadow: 2px 3px 10px 1px #eee;
+    padding: 2rem 1rem;
+    width: 87%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #F8F9FA
+}
+
+body {
+    font-family: 'Muli', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
 }
