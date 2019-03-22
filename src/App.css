@@ -11,16 +11,18 @@
 
 .course-length {
     position: absolute;
-    bottom: 2rem;
+    bottom: 3rem;
 }
 
 .total-courses-text {
     margin-left: 8rem;
-    padding: .5rem 2rem 2rem 2rem ;
+    padding: .5rem 2rem 2rem 2rem;
 }
+
 .custom-dropdown {
     transform: translate3d(0px, 38px, 0px) !important;
 }
+
 .text-muted {
     color: #00953A !important;
 }
@@ -31,7 +33,28 @@
     overflow-x: hidden;
 }
 
-.course-card{
+.search-form {
+    display: inline-flex;
+}
+
+.search-filter {
+    background: transparent;
+    border: 1px solid #00B746;
+    color: white
+}
+
+.search-filter:hover {
+    background: transparent;
+    border: 1px solid #00B746;
+    color: white
+}
+
+.search-button {
+    background-color: #00B746;
+    color: white;
+}
+
+.course-card {
     width: 15rem;
     flex: inherit !important;
     height: 18rem;
@@ -40,9 +63,14 @@
     cursor: pointer;
 }
 
+.search-box {
+    width: 40rem;
+}
+
 .course-card:hover {
     box-shadow: 2px 3px 10px 1px #aaa;
 }
+
 .jumbotron {
     box-shadow: 2px 3px 10px 1px #eee;
     padding: 2rem 1rem;

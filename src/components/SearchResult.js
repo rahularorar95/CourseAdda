@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { fetchCourses } from "../actions/index"
 import CardDeck from "react-bootstrap/CardDeck"
 import Dropdown from "react-bootstrap/Dropdown"
 import Button from "react-bootstrap/Button"
@@ -10,21 +9,10 @@ import Jumbotron from "react-bootstrap/Jumbotron"
 import _ from "lodash"
 import "../App.css"
 import CustomMenu from "./CustomMenu"
-export class ProviderCourses extends Component {
+export class SearchResult extends Component {
     state = { localCourses: [], childSubjects: [], filter: "All" }
     componentDidMount() {
-        if (this.props.providers) {
-            this.populateState()
-        } else {
-            this.props.fetchCourses().then(res => {
-                this.populateState()
-            })
-        }
-    }
-
-    populateState() {
-        let courses = this.props.providers[this.props.match.params.id]
-        let childSubjects = courses
+        let childSubjects = this.props.searchResults
             .filter(item => {
                 return item["Child Subject"] !== ""
             })
@@ -33,8 +21,22 @@ export class ProviderCourses extends Component {
             })
         childSubjects = Array.from(new Set(childSubjects))
         childSubjects.unshift("All")
-        this.setState({ localCourses: courses, childSubjects })
+        this.setState({ localCourses: this.props.searchResults, childSubjects })
     }
+
+    componentWillReceiveProps(nextProps) {
+        let childSubjects = nextProps.searchResults
+            .filter(item => {
+                return item["Child Subject"] !== ""
+            })
+            .map(item => {
+                return item["Child Subject"]
+            })
+        childSubjects = Array.from(new Set(childSubjects))
+        childSubjects.unshift("All")
+        this.setState({ localCourses: nextProps.searchResults, childSubjects, filter: "All" })
+    }
+
     sortLength(val) {
         if (val === "high") {
             this.setState({ localCourses: _.sortBy(this.state.localCourses, "Length").reverse() })
@@ -46,7 +48,6 @@ export class ProviderCourses extends Component {
         this.setState({ filter: this.state.childSubjects[eventKey] })
     }
     render() {
-        let provider = this.props.match.params.id
         if (this.state.localCourses && this.state.localCourses.length > 0) {
             return (
                 <>
@@ -64,7 +65,7 @@ export class ProviderCourses extends Component {
                     <div>
                         <Jumbotron className='jumbotron'>
                             <div style={{ display: "-webkit-inline-box" }}>
-                                <h4 style={{ "marginBottom": "1.5rem" }}>All Courses from {provider}</h4>
+                                <h4 style={{ "marginBottom": "1.5rem" }}>Search Result for </h4>
                                 <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "10%" }}>
                                     <Button variant='success'>Sort By :</Button>
 
@@ -112,18 +113,15 @@ export class ProviderCourses extends Component {
                 </>
             )
         } else {
-            return <div>Loading...</div>
+            return <div>No Result Found !</div>
         }
     }
 }
 
 const mapStateToProps = state => {
     return {
-        allCourses: state.courses.allCourses,
-        providers: state.courses.providers
+        searchResults: state.courses.searchResults
     }
 }
-export default connect(
-    mapStateToProps,
-    { fetchCourses }
-)(ProviderCourses)
+
+export default connect(mapStateToProps)(SearchResult)

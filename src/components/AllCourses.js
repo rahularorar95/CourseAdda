@@ -2,11 +2,11 @@ import React, { Component } from "react"
 import CourseList from "./CourseList"
 import { connect } from "react-redux"
 import { fetchCourses } from "../actions/index"
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import '../App.css'
+import Jumbotron from "react-bootstrap/Jumbotron"
+import "../App.css"
 export class AllCourses extends Component {
     componentDidMount() {
-        this.props.fetchCourses()
+        //this.props.fetchCourses()
     }
 
     renderAllLists() {
@@ -20,20 +20,21 @@ export class AllCourses extends Component {
     }
     render() {
         if (this.props.providers) {
-            return <div>
+            return (
                 <div>
+                    <div>
                         <Jumbotron className='jumbotron' />
                     </div>
-            <h3 className="total-courses-text">Total Courses Found: {this.props.allCourses.length}</h3>
-            {this.renderAllLists()}
-            </div>
+                    <h3 className='total-courses-text'>Total Courses Found: {this.props.allCourses.length}</h3>
+                    {this.renderAllLists()}
+                </div>
+            )
         }
 
         return <div>Loading...</div>
     }
 }
 const mapStateToProps = state => {
-    //console.log(state)
     return {
         allCourses: state.courses.allCourses,
         providers: state.courses.providers

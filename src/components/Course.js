@@ -10,15 +10,18 @@ export class Course extends Component {
         //console.log(course)
         return (
             <>
-                <Card className='course-card' onClick={() => this.handleClick(course.Url)} Title={course["Course Name"]}>
+                <Card className='course-card' onClick={() => this.handleClick(course.Url)} title={course["Course Name"]}>
                     <Card.Body>
-                        <Card.Title>{course["Course Name"]}</Card.Title>
+                        <Card.Title>
+                            {course["Course Name"].slice(0, 80)}
+                            {course["Course Name"].length >= 80 ? "...." : ""}
+                        </Card.Title>
                         <Card.Text>
                             {course["Parent Subject"]}
                             <br />
                             {course["Universities"]["Institutions"].split("|||").join(",")}
                             <br />
-                            <p className='course-length'>{course["Length"]} weeks</p>
+                            <span className='course-length'>{course["Length"]} weeks</span>
                         </Card.Text>
                     </Card.Body>
                     <Card.Footer>

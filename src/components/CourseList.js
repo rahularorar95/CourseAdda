@@ -23,16 +23,8 @@ export class CourseList extends Component {
         if (Provider) {
             return (
                 <Jumbotron
-                    className='jumbotron'
-                    style={{
-                        padding: "2rem 1rem",
-                        width: "87%",
-                        "margin-right": "auto",
-                        "margin-left": "auto",
-                        "background-color": "#F8F9FA"
-                    }}
-                >
-                    <h4 style={{ "margin-bottom": "1.5rem" }}>Courses from {Provider}</h4>
+                    className='jumbotron'>
+                    <h4 style={{ "marginBottom": "1.5rem" }}>Courses from {Provider}</h4>
                     <CardDeck className='card-deck'>
                         {this.props.courseList.slice(0, 6).map((item, index) => {
                             return <Course key={index} course={item} />

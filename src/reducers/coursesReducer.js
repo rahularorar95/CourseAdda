@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { searchResults: [] }, action) => {
     switch (action.type) {
         case "FETCH_COURSES":
             let providers = {}
@@ -30,6 +30,9 @@ export default (state = {}, action) => {
                 return item
             })
             return { ...state, allCourses, providers, subjects, universities }
+
+        case "SET_SEARCH_RESULT":
+            return { ...state, searchResults: action.payload }
         default:
             return state
     }
