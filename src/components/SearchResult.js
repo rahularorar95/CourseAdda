@@ -59,7 +59,7 @@ export class SearchResult extends Component {
                 <div>
                     <Jumbotron className='jumbotron'>
                         <div style={{ display: "-webkit-inline-box" }}>
-                            <h4 style={{ marginBottom: "1.5rem" }}>Search Result for </h4>
+                            <h4 style={{ marginBottom: "1.5rem" }}>Search Results for "<i>{this.props.searchTerm}</i>" </h4>
                             <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "10%" }}>
                                 <Button variant='success'>Sort By :</Button>
 
@@ -129,7 +129,8 @@ export class SearchResult extends Component {
 
 const mapStateToProps = state => {
     return {
-        searchResults: state.courses.searchResults
+        searchResults: state.courses.searchResults,
+        searchTerm: state.courses.searchTerm
     }
 }
 

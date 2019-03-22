@@ -58,11 +58,6 @@
     color: white
 }
 
-.search-button {
-    background-color: #00B746;
-    color: white;
-}
-
 .course-card {
     width: 15rem;
     flex: inherit !important;

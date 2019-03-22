@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Navbar, Nav, Form, Button, Row, Col } from "react-bootstrap"
+import { Navbar, Nav, Form, Button, Row, Col, Spinner } from "react-bootstrap"
 import Dropdown from "react-bootstrap/Dropdown"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import { connect } from "react-redux"
@@ -63,7 +63,7 @@ export class Header extends Component {
             }
         }
 
-        this.props.setSearchResult(Array.from(new Set(searchResults)))
+        this.props.setSearchResult(Array.from(new Set(searchResults)),this.state.searchTerm)
     }
 
     onSelectSecondary(eventKey, eventObj) {
@@ -98,12 +98,12 @@ export class Header extends Component {
                             <Row className='mr-auto'>
                                 <Col className='search-box'>
                                     <Form.Control
-                                        placeholder={this.props.allCourses? 'Enter course to search...':'Loading Courses...'}
+                                        placeholder={this.props.allCourses ? "Enter course to search..." : "Loading Courses..."}
                                         value={this.state.searchTerm}
                                         onChange={e => this.onChange(e)}
                                     />
                                 </Col>
-                                <Col>
+                                <Col xs={3}>
                                     <Dropdown as={ButtonGroup}>
                                         <Button className='search-filter'>Search in</Button>
                                         <Dropdown.Toggle split variant='success' id='dropdown-split-basic'>
@@ -165,12 +165,12 @@ export class Header extends Component {
                                 )}
 
                                 <Col>
-                                    <Button
-                                        variant='outline-success'
-                                        className='search-button'
-                                        onClick={e => this.handleSearch(e)}
-                                    >
-                                        Search
+                                    <Button variant='success' className='search-button' onClick={e => this.handleSearch(e)}>
+                                        {this.props.allCourses ? (
+                                            "Search Courses"
+                                        ) : (
+                                            <Spinner as='span' animation='grow' size='sm' role='status' aria-hidden='true' />
+                                        )}
                                     </Button>
                                 </Col>
                             </Row>

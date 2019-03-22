@@ -32,7 +32,7 @@ export default (state = { searchResults: [] }, action) => {
             return { ...state, allCourses, providers, subjects, universities }
 
         case "SET_SEARCH_RESULT":
-            return { ...state, searchResults: action.payload }
+            return { ...state, searchResults: action.payload.result, searchTerm: action.payload.searchTerm }
         default:
             return state
     }
