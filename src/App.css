@@ -5,6 +5,15 @@
 
 }
 
+.no-result {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 2rem;
+}
 .card {
     margin-bottom: 20px !important;
 }

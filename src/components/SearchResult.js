@@ -48,73 +48,82 @@ export class SearchResult extends Component {
         this.setState({ filter: this.state.childSubjects[eventKey] })
     }
     render() {
+        let content = (
+            <div className='no-result'>
+                No Results Found !<br />
+                Search Again
+            </div>
+        )
         if (this.state.localCourses && this.state.localCourses.length > 0) {
-            return (
-                <>
-                    <div>
-                        <Jumbotron className='jumbotron' />
-                    </div>
-                    <h3 className='total-courses-text'>
-                        Total Courses Found:
-                        {
-                            this.state.localCourses.filter((item, index) => {
-                                return this.state.filter === "All" || item["Child Subject"] === this.state.filter
-                            }).length
-                        }
-                    </h3>
-                    <div>
-                        <Jumbotron className='jumbotron'>
-                            <div style={{ display: "-webkit-inline-box" }}>
-                                <h4 style={{ "marginBottom": "1.5rem" }}>Search Result for </h4>
-                                <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "10%" }}>
-                                    <Button variant='success'>Sort By :</Button>
+            content = (
+                <div>
+                    <Jumbotron className='jumbotron'>
+                        <div style={{ display: "-webkit-inline-box" }}>
+                            <h4 style={{ marginBottom: "1.5rem" }}>Search Result for </h4>
+                            <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "10%" }}>
+                                <Button variant='success'>Sort By :</Button>
 
-                                    <Dropdown.Toggle split variant='success' id='dropdown-split-basic' />
+                                <Dropdown.Toggle split variant='success' id='dropdown-split-basic' />
 
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item onClick={e => this.sortLength("high")}>Highest Duration</Dropdown.Item>
-                                        <Dropdown.Item onClick={e => this.sortLength("low")}>Lowest Duration</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "20%" }}>
-                                    <Button variant='success'>
-                                        Filter: {this.state.filter === "All" ? "" : this.state.filter}
-                                    </Button>
-                                    <Dropdown.Toggle split variant='success' id='dropdown-split-basic' />
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={e => this.sortLength("high")}>Highest Duration</Dropdown.Item>
+                                    <Dropdown.Item onClick={e => this.sortLength("low")}>Lowest Duration</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "20%" }}>
+                                <Button variant='success'>Filter: {this.state.filter === "All" ? "" : this.state.filter}</Button>
+                                <Dropdown.Toggle split variant='success' id='dropdown-split-basic' />
 
-                                    <Dropdown.Menu as={CustomMenu} className='custom-dropdown'>
-                                        {this.state.childSubjects.map((item, index) => {
-                                            if (item === this.state.filter) {
-                                                return (
-                                                    <Dropdown.Item key={index} eventKey={index} active="true">
-                                                        {item}
-                                                    </Dropdown.Item>
-                                                )
-                                            }
+                                <Dropdown.Menu as={CustomMenu} className='custom-dropdown'>
+                                    {this.state.childSubjects.map((item, index) => {
+                                        if (item === this.state.filter) {
                                             return (
-                                                <Dropdown.Item key={index} onSelect={(ek, eo) => this.onSelect(ek, eo)} eventKey={index}>
+                                                <Dropdown.Item key={index} eventKey={index} active='true'>
                                                     {item}
                                                 </Dropdown.Item>
                                             )
-                                        })}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                ,
-                            </div>
-                            <CardDeck className='card-deck'>
-                                {this.state.localCourses.map((item, index) => {
-                                    if (this.state.filter === "All" || item["Child Subject"] === this.state.filter)
-                                        return <Course key={index} course={item} />
-                                    return ""
-                                })}
-                            </CardDeck>
-                        </Jumbotron>
-                    </div>
-                </>
+                                        }
+                                        return (
+                                            <Dropdown.Item
+                                                key={index}
+                                                onSelect={(ek, eo) => this.onSelect(ek, eo)}
+                                                eventKey={index}
+                                            >
+                                                {item}
+                                            </Dropdown.Item>
+                                        )
+                                    })}
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            ,
+                        </div>
+                        <CardDeck className='card-deck'>
+                            {this.state.localCourses.map((item, index) => {
+                                if (this.state.filter === "All" || item["Child Subject"] === this.state.filter)
+                                    return <Course key={index} course={item} />
+                                return ""
+                            })}
+                        </CardDeck>
+                    </Jumbotron>
+                </div>
             )
-        } else {
-            return <div>No Result Found !</div>
         }
+        return (
+            <>
+                <div>
+                    <Jumbotron className='jumbotron' />
+                </div>
+                <h3 className='total-courses-text'>
+                    Total Courses Found :
+                    {
+                        this.state.localCourses.filter((item, index) => {
+                            return this.state.filter === "All" || item["Child Subject"] === this.state.filter
+                        }).length
+                    }
+                </h3>
+                {content}
+            </>
+        )
     }
 }
 

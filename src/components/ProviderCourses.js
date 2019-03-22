@@ -10,20 +10,21 @@ import Jumbotron from "react-bootstrap/Jumbotron"
 import _ from "lodash"
 import "../App.css"
 import CustomMenu from "./CustomMenu"
+import Loader from "./Loader/Loader"
 export class ProviderCourses extends Component {
     state = { localCourses: [], childSubjects: [], filter: "All" }
     componentDidMount() {
         if (this.props.providers) {
-            this.populateState()
-        } else {
-            this.props.fetchCourses().then(res => {
-                this.populateState()
-            })
+            this.populateState(this.props)
         }
     }
-
-    populateState() {
-        let courses = this.props.providers[this.props.match.params.id]
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.providers) {
+            this.populateState(nextProps)
+        }
+    }
+    populateState(props) {
+        let courses = props.providers[this.props.match.params.id]
         let childSubjects = courses
             .filter(item => {
                 return item["Child Subject"] !== ""
@@ -54,7 +55,7 @@ export class ProviderCourses extends Component {
                         <Jumbotron className='jumbotron' />
                     </div>
                     <h3 className='total-courses-text'>
-                        Total Courses Found:
+                        Total Courses Found :
                         {
                             this.state.localCourses.filter((item, index) => {
                                 return this.state.filter === "All" || item["Child Subject"] === this.state.filter
@@ -64,7 +65,7 @@ export class ProviderCourses extends Component {
                     <div>
                         <Jumbotron className='jumbotron'>
                             <div style={{ display: "-webkit-inline-box" }}>
-                                <h4 style={{ "marginBottom": "1.5rem" }}>All Courses from {provider}</h4>
+                                <h4 style={{ marginBottom: "1.5rem" }}>All Courses from {provider}</h4>
                                 <Dropdown as={ButtonGroup} style={{ position: "absolute", right: "10%" }}>
                                     <Button variant='success'>Sort By :</Button>
 
@@ -85,13 +86,17 @@ export class ProviderCourses extends Component {
                                         {this.state.childSubjects.map((item, index) => {
                                             if (item === this.state.filter) {
                                                 return (
-                                                    <Dropdown.Item key={index} eventKey={index} active="true">
+                                                    <Dropdown.Item key={index} eventKey={index} active='true'>
                                                         {item}
                                                     </Dropdown.Item>
                                                 )
                                             }
                                             return (
-                                                <Dropdown.Item key={index} onSelect={(ek, eo) => this.onSelect(ek, eo)} eventKey={index}>
+                                                <Dropdown.Item
+                                                    key={index}
+                                                    onSelect={(ek, eo) => this.onSelect(ek, eo)}
+                                                    eventKey={index}
+                                                >
                                                     {item}
                                                 </Dropdown.Item>
                                             )
@@ -112,7 +117,7 @@ export class ProviderCourses extends Component {
                 </>
             )
         } else {
-            return <div>Loading...</div>
+            return <Loader />
         }
     }
 }

@@ -80,10 +80,12 @@ export class Header extends Component {
                     expand='lg'
                     variant='dark'
                     style={{
-                        "backgroundColor": "#00953A"
+                        backgroundColor: "#00953A"
                     }}
                 >
-                    <Navbar.Brand onClick={this.navigateHome}>CourseAdda </Navbar.Brand>
+                    <Navbar.Brand onClick={this.navigateHome} style={{ cursor: "pointer" }}>
+                        CourseAdda{" "}
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='mr-auto'>
@@ -96,7 +98,7 @@ export class Header extends Component {
                             <Row className='mr-auto'>
                                 <Col className='search-box'>
                                     <Form.Control
-                                        placeholder='Enter course to search...'
+                                        placeholder={this.props.allCourses? 'Enter course to search...':'Loading Courses...'}
                                         value={this.state.searchTerm}
                                         onChange={e => this.onChange(e)}
                                     />
@@ -112,13 +114,14 @@ export class Header extends Component {
                                             {this.state.primaryFilters.map((item, index) => {
                                                 if (item === this.state.primaryFilter) {
                                                     return (
-                                                        <Dropdown.Item key={index} eventKey={index} active="true">
+                                                        <Dropdown.Item key={index} eventKey={index} active='true'>
                                                             {item}
                                                         </Dropdown.Item>
                                                     )
                                                 }
                                                 return (
-                                                    <Dropdown.Item key={index}
+                                                    <Dropdown.Item
+                                                        key={index}
                                                         onSelect={(ek, eo) => this.onSelectPrimary(ek, eo)}
                                                         eventKey={index}
                                                     >
@@ -141,7 +144,7 @@ export class Header extends Component {
                                                 {this.state.secondaryFilters.map((item, index) => {
                                                     if (item === this.state.secondaryFilter) {
                                                         return (
-                                                            <Dropdown.Item key={index} eventKey={index} active="true">
+                                                            <Dropdown.Item key={index} eventKey={index} active='true'>
                                                                 {item}
                                                             </Dropdown.Item>
                                                         )

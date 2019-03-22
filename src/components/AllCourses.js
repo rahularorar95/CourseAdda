@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { fetchCourses } from "../actions/index"
 import Jumbotron from "react-bootstrap/Jumbotron"
 import "../App.css"
+import Loader from "./Loader/Loader";
 export class AllCourses extends Component {
     componentDidMount() {
         //this.props.fetchCourses()
@@ -25,13 +26,13 @@ export class AllCourses extends Component {
                     <div>
                         <Jumbotron className='jumbotron' />
                     </div>
-                    <h3 className='total-courses-text'>Total Courses Found: {this.props.allCourses.length}</h3>
+                    <h3 className='total-courses-text'>Total Courses Found : {this.props.allCourses.length}</h3>
                     {this.renderAllLists()}
                 </div>
             )
         }
 
-        return <div>Loading...</div>
+        return <Loader />
     }
 }
 const mapStateToProps = state => {
