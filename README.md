@@ -4,7 +4,7 @@
 
 ## Getting started
 
-You can view a live demo over at https://react-redux.realworld.io/
+You can view a live demo over at https://course-adda.herokuapp.com/
 
 To get the frontend running locally:
 
