@@ -7,7 +7,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup"
 import Course from "./Course"
 import Jumbotron from "react-bootstrap/Jumbotron"
 import _ from "lodash"
-import "../App.css"
+import "./App/App.css"
 import CustomMenu from "./CustomMenu"
 export class SearchResult extends Component {
     state = { localCourses: [], childSubjects: [], filter: "All" }

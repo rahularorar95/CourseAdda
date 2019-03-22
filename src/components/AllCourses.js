@@ -3,7 +3,7 @@ import CourseList from "./CourseList"
 import { connect } from "react-redux"
 import { fetchCourses } from "../actions/index"
 import Jumbotron from "react-bootstrap/Jumbotron"
-import "../App.css"
+import "./App/App.css"
 import Loader from "./Loader/Loader";
 export class AllCourses extends Component {
     componentDidMount() {

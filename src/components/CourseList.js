@@ -4,7 +4,7 @@ import Jumbotron from "react-bootstrap/Jumbotron"
 import Button from "react-bootstrap/Button"
 import Course from "./Course"
 import history from '../history'
-import "../App.css"
+import "./App/App.css"
 export class CourseList extends Component {
     viewAll(e,provider) {
         e.preventDefault()

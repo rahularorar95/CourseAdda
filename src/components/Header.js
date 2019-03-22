@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 import { fetchCourses, setSearchResult } from "../actions"
 import CustomMenu from "./CustomMenu"
 import history from "../history"
-import "../App.css"
+import "./App/App.css"
 export class Header extends Component {
     componentDidMount() {
         this.props.fetchCourses()

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Card from "react-bootstrap/Card"
-import "../App.css"
+import "./App/App.css"
 export class Course extends Component {
     handleClick(url) {
         if (url) window.open(url, "_blank")
